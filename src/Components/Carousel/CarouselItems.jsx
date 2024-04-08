@@ -9,7 +9,7 @@ import "./carousel.scss";
 function CarouselItems({ items, sectionName }) {
   return (
     <div className="items_section">
-      <SkeletonSection text={sectionName} />
+      <SkeletonSection text={sectionName} infiniteLoop={true}/>
       <Carousel useKeyboardArrows={true}>
         {items?.map((item) => (
           <div className="product" key={item.id}>
