@@ -11,19 +11,17 @@ function CarouselItems({ items, sectionName }) {
     <div className="items_section">
       <SkeletonSection text={sectionName} />
       <Carousel useKeyboardArrows={true}>
-        {items?.map((item, index) => (
-          <div className="product" key={index}>
+        {items?.map((item) => (
+          <div className="product" key={item.id}>
             <img
-              src={item.image}
-              width={130}
-              height={130}
+              src={item.img}
+              width={190}
+              height={230}
               alt="Picture of the author"
             />
             <div>
-              <h3>Название: {item.title}</h3>
+              <h3>Название: {item.name}</h3>
               <p className="price">Price: {item.price}</p>
-              <p className="rating">Rating: {item.rating.rate}</p>
-              <p className="count">Count buy: {item.rating.count}</p>
             </div>
           </div>
         ))}

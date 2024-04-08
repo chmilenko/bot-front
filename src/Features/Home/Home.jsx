@@ -1,32 +1,27 @@
-import { useState, useEffect } from "react";
-
 import "./home.scss";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import Header from "@Components/Header/Header";
 import LogoSection from "@Components/LogoSection/LogoSection";
 import CarouselItems from "@Components/Carousel/CarouselItems";
+import Basket from "../../Components/Basket/Basket";
+import { data } from "../../mock";
 
 function Home() {
-  const [items, setItem] = useState();
-
-  useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((response) => response.json())
-      .then((data) => setItem(data))
-      .catch((error) => console.error(error));
-  }, [items]);
-
+  console.log(data);
   return (
-    <div className="container">
-      <Header />
-      <div>
-        <LogoSection />
+    <>
+      <div className="container">
+        <Header />
+        <div className="logo_section">
+          <LogoSection />
+        </div>
+        <CarouselItems items={data} sectionName="NIKE" />
+        <CarouselItems items={data} sectionName="ADIDAS" />
+        <CarouselItems items={data} sectionName="RICK OWENS" />
       </div>
-      <CarouselItems items={items} sectionName="Nike" />
-      <CarouselItems items={items} sectionName="Adidas" />
-      <CarouselItems items={items} sectionName="Rick Owens" />
-    </div>
+      <Basket />
+    </>
   );
 }
 

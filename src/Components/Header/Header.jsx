@@ -5,9 +5,9 @@ import "./header.scss";
 
 function Header() {
   const options = [
-    { value: "apple", label: "Яблоко" },
-    { value: "banana", label: "Банан" },
-    { value: "orange", label: "Апельсин" },
+    { value: "Sneakers", label: "Кроссовки" },
+    { value: "Outerwear", label: "Одежда" },
+    { value: "Accessories", label: "Аксуссуары" },
   ];
   return (
     <div className="header">
@@ -17,7 +17,6 @@ function Header() {
         className="main_logo"
         style={{ width: 150, height: 150 }}
       />
-
       <div>
         <SelectComponent value="Категория" options={options} />
       </div>
