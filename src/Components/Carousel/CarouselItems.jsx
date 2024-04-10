@@ -5,23 +5,31 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import SkeletonSection from "@Components/SkeletonSection/SkeletonSection";
 
 import "./carousel.scss";
-// eslint-disable-next-line react/prop-types
+
 function CarouselItems({ items, sectionName }) {
+  // Собираем firstImage для каждого элемента заранее
+
+console.log(items.map((el) => console.log(el.attributes.Images.data[0].attributes.formats.medium?.url)));
   return (
     <div className="items_section">
-      <SkeletonSection text={sectionName} infiniteLoop={true}/>
+      <SkeletonSection text={sectionName} infiniteLoop={true} />
       <Carousel useKeyboardArrows={true}>
         {items?.map((item) => (
           <div className="product" key={item.id}>
             <img
-              src={item.img}
-              width={190}
-              height={230}
-              alt="Picture of the author"
+              src={
+                item.attributes.Images.data[0].attributes.formats.medium?.url
+              }
+              alt={item?.attributes?.Name}
+
             />
+
             <div>
-              <h3>Название: {item.name}</h3>
-              <p className="price">Price: {item.price}</p>
+              <h3>
+                {item?.attributes?.mark?.data?.attributes?.Name}{" "}
+                {item?.attributes?.Name}
+              </h3>
+              <p className="price">Price: {item.attributes.Price}</p>
             </div>
           </div>
         ))}

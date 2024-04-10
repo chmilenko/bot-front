@@ -4,11 +4,28 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Header from "@Components/Header/Header";
 import LogoSection from "@Components/LogoSection/LogoSection";
 import CarouselItems from "@Components/Carousel/CarouselItems";
-import Basket from "../../Components/Basket/Basket";
-import { data } from "../../mock";
+import Basket from "@Components/Basket/Basket";
+
+import useModels from "@Core/Store/models";
+import Api from "@Core/Api/api";
+
+import { useEffect } from "react";
 
 function Home() {
-  console.log(data);
+  const { setModels, models } = useModels();
+
+  useEffect(() => {
+    Api.getAllModels().then((res) => {
+      setModels(res.data.data);
+    });
+  }, [setModels]);
+
+  function filterMarks(mark) {
+    return models.filter(
+      (el) => el.attributes.mark.data.attributes.Name === mark
+    );
+  }
+
   return (
     <>
       <div className="container">
@@ -16,9 +33,9 @@ function Home() {
         <div className="logo_section">
           <LogoSection />
         </div>
-        <CarouselItems items={data} sectionName="NIKE" />
-        <CarouselItems items={data} sectionName="ADIDAS" />
-        <CarouselItems items={data} sectionName="RICK OWENS" />
+        <CarouselItems items={models} sectionName="NIKE" />
+        <CarouselItems items={models} sectionName="ADIDAS" />
+        <CarouselItems items={models} sectionName="RICK OWENS" />
       </div>
       <Basket />
     </>

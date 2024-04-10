@@ -13,6 +13,7 @@ export default defineConfig({
       "@Ui": path.resolve(__dirname, "src/UI"),
       "@Utils": path.resolve(__dirname, "src/Utils"),
       "@Features": path.resolve(__dirname, "src/Features"),
+      "@Core": path.resolve(__dirname, "src/Core"),
 
     },
   },
