@@ -1,13 +1,24 @@
+/* eslint-disable react/prop-types */
+
+import { useState } from "react";
+
 import "./Select.scss";
 
-// eslint-disable-next-line react/prop-types
-function SelectComponent({ value, className, options }) {
+function SelectComponent({ className, options }) {
+  const [mark, setValue] = useState();
+
+  const handleOnChange = (event) => {
+    setValue(event.target.value);
+  };
+
   return (
-    <select value={value} className={`select ${className ? "" : className}`}>
-      {options.map((option, index) => (
-        <option key={index} value={option.value}>
-          {option.label}
-        </option>
+    <select
+      value={mark}
+      onChange={(e) => handleOnChange(e.target.value)}
+      className={`select ${className ? "" : className}`}
+    >
+      {options?.data?.map((option) => (
+        <option key={option.id}>{option.attributes.Name}</option>
       ))}
     </select>
   );

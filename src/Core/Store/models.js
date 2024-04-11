@@ -1,12 +1,23 @@
 import { create } from "zustand";
 
- const useModels = create((set) => ({
-    models: [],
-    setModels: (models) =>
+const useModels = create((set) => ({
+  modelsNike: [],
+  modelsAdidas: [],
+  modelsRickOwens: [],
+  setModelsNike: (models) =>
     set((state) => ({
       ...state,
-      models: models,
+      modelsNike: models,
     })),
-}))
-
-export default useModels
+  setModelsAdidas: (models) =>
+    set((state) => ({
+      ...state,
+      modelsAdidas: models,
+    })),
+  setModelsRickOwens: (models) =>
+    set((state) => ({
+      ...state,
+      modelsRickOwens: models,
+    })),
+}));
+export default useModels;

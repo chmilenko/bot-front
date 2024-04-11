@@ -14,7 +14,7 @@ function Basket() {
   };
 
   return (
-    <div>
+    <div className="backet_container">
       <div className="basket-trigger" onClick={toggleModal}>
         Корзина
       </div>
