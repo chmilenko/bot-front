@@ -5,13 +5,15 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import "./model.scss";
 
+import Basket from "@Components/Basket/Basket";
+
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useNavigate } from "react-router-dom";
 
 function ModelInfo() {
   const { oneModel } = useOneModel();
   let navigate = useNavigate();
-console.log(oneModel);
+  console.log(oneModel);
   return (
     <div className="container_model">
       <div onClick={() => navigate(-1)}>Назад</div>
@@ -36,6 +38,7 @@ console.log(oneModel);
           </div>
         </div>
       </div>
+      <Basket />
     </div>
   );
 }
