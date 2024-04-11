@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 function ModelInfo() {
   const { oneModel } = useOneModel();
   let navigate = useNavigate();
-
+console.log(oneModel);
   return (
     <div className="container_model">
       <div onClick={() => navigate(-1)}>Назад</div>
@@ -26,13 +26,13 @@ function ModelInfo() {
           {oneModel?.data?.attributes.Name}
         </h3>
         <div className="sizes">
-          {oneModel.data.attributes.size.data.attributes.Sizes.map(
+          {oneModel?.data?.attributes?.size?.data?.attributes?.Sizes?.map(
             (size, i) => (
               <button key={i}>{size.size}</button>
             )
           )}
           <div className="description">
-            {oneModel.data.attributes.Description}
+            {oneModel?.data?.attributes?.Description}
           </div>
         </div>
       </div>
