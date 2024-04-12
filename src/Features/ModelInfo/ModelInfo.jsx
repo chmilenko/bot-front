@@ -35,7 +35,7 @@ function ModelInfo() {
             <button
               key={i}
               className="size"
-              disabled={oneModel?.data?.sizes?.some((s) => s.Size === size)}
+              disabled={!oneModel?.data?.sizes?.some((s) => s.Size === size)}
             >
               {size}
             </button>
