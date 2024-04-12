@@ -10,6 +10,8 @@ import useModels from "@Core/Store/models";
 import Api from "@Core/Api/api";
 import useMarks from "@Core/Store/marks";
 
+import "./home.scss";
+
 const HomeDataLoader = () => {
   const { marks, setMarks } = useMarks();
   const {
@@ -38,9 +40,7 @@ const HomeDataLoader = () => {
     <>
       <div className="container">
         <Header marks={marks} />
-        <div className="logo_section">
-          <LogoSection />
-        </div>
+
         {modelsAdidas.length && modelsNike.length && modelsRickOwens.length ? (
           <>
             <CarouselItems items={modelsNike} sectionName="NIKE" />
@@ -51,6 +51,9 @@ const HomeDataLoader = () => {
           <Loader />
         )}
         <Basket />
+        <div className="logo_section">
+          <LogoSection />
+        </div>
       </div>
     </>
   );

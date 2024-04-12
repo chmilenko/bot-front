@@ -15,12 +15,16 @@
       justify-content: center;
       gap: 1vh;
       flex-wrap: wrap;
-      .size {
+      .size, .size_active {
         outline: none;
         border: none;
         width: 60px;
         height: 30px;
         background-image: linear-gradient(to bottom, #2adbe7, #776e6e);
+      }
+      .size_active {
+        width: 90px;
+        height: 40px;
       }
     }
   }

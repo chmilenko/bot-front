@@ -28,7 +28,11 @@ const Api = {
       })
     },
     postOrder() {
-
+      return instance.get(`/orders`, {
+        headers: {
+          Authorization: `Bearer ${import.meta.env.VITE_REACT_APP_TOKEN}`,
+        },
+      })
     }
   };
 

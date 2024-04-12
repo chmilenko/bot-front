@@ -13,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 import Api from "@Core/Api/api";
 import useOneModel from "@Core/Store/oneModel";
 
+import Skeleton from "react-loading-skeleton";
+
 function CarouselItems({ items, sectionName }) {
   let navigate = useNavigate();
 
@@ -22,7 +24,7 @@ function CarouselItems({ items, sectionName }) {
     Api.getModelById(id).then((res) => setOneModel(res.data));
     navigate(`/models/${id}`);
   };
-  console.log(items);
+
   return (
     <div className="items_section">
       <SkeletonSection text={sectionName} infiniteLoop={true} />
@@ -33,11 +35,19 @@ function CarouselItems({ items, sectionName }) {
             onClick={() => handleSetOneModel(item.id)}
             key={item.id}
           >
-            <LazyLoadImage
-              src={item.Images[0].formats.medium?.url}
-              alt={item?.attributes?.Name}
-              effect="blur"
-            />
+            {item.Images[0].formats.medium?.url ? (
+              <LazyLoadImage
+                src={item.Images[0].formats.medium?.url}
+                alt={item?.attributes?.Name}
+                effect="blur"
+              />
+            ) : (
+              <div>
+                {" "}
+                <Skeleton width={100} height={250} />
+              </div>
+            )}
+
             <div>
               <h3>
                 {item?.mark?.Name} {item?.Name}

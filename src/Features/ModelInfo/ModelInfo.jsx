@@ -1,22 +1,31 @@
-import useOneModel from "@Core/Store/oneModel";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 import Basket from "@Components/Basket/Basket";
+
+import "./model.scss";
 
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-import "./model.scss";
+import useOneModel from "@Core/Store/oneModel";
 
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import { useNavigate } from "react-router-dom";
 
 function ModelInfo() {
   const { oneModel } = useOneModel();
-  let allSizes = [
-    36, 36.5, 37, 37.5, 38, 38.5, 39, 39.5, 40, 40.5, 41, 41.5, 42, 42.5, 43,
-    43.5, 44, 44.5, 45, 45.5, 46, 46.5, 47,
-  ];
   let navigate = useNavigate();
-  console.log(oneModel);
+
+  const [selectedSizes, setSelectedSizes] = useState([]);
+
+  const handleSizeClick = (size) => {
+    if (selectedSizes.includes(size)) {
+      setSelectedSizes(selectedSizes.filter((s) => s !== size));
+    } else {
+      setSelectedSizes([...selectedSizes, size]);
+    }
+  };
+
   return (
     <div className="container_model">
       <div onClick={() => navigate(-1)}>Назад</div>
@@ -30,13 +39,13 @@ function ModelInfo() {
           {oneModel?.data?.mark?.Name} {oneModel?.data?.Name}
         </h3>
         <div className="sizes">
-          {allSizes.map((size, i) => (
+          {oneModel?.data?.sizes?.map((size, i) => (
             <button
               key={i}
-              className="size"
-              disabled={!oneModel?.data?.sizes?.some((s) => s.size === size)}
+              className={selectedSizes.includes(size) ? "size_active" : "size"}
+              onClick={() => handleSizeClick(size)}
             >
-              {size}
+              {size.size}
             </button>
           ))}
         </div>
