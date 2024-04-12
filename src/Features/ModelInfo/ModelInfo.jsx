@@ -1,19 +1,20 @@
 import useOneModel from "@Core/Store/oneModel";
+import Basket from "@Components/Basket/Basket";
 
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import "./model.scss";
 
-import Basket from "@Components/Basket/Basket";
-
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useNavigate } from "react-router-dom";
 
 function ModelInfo() {
+
   const { oneModel } = useOneModel();
+
   let navigate = useNavigate();
-  console.log(oneModel);
+
   return (
     <div className="container_model">
       <div onClick={() => navigate(-1)}>Назад</div>
@@ -30,13 +31,13 @@ function ModelInfo() {
         <div className="sizes">
           {oneModel?.data?.attributes?.size?.data?.attributes?.Sizes?.map(
             (size, i) => (
-              <button key={i}>{size.size}</button>
+              <button key={i} className="size">{size.size}</button>
             )
           )}
+        </div>
           <div className="description">
             {oneModel?.data?.attributes?.Description}
           </div>
-        </div>
       </div>
       <Basket />
     </div>

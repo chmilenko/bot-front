@@ -26,6 +26,9 @@ const Api = {
           Authorization: `Bearer ${import.meta.env.VITE_REACT_APP_TOKEN}`,
         },
       })
+    },
+    postOrder() {
+
     }
   };
 

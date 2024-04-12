@@ -8,7 +8,7 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import SkeletonSection from "@Components/SkeletonSection/SkeletonSection";
 
 import "./carousel.scss";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Api from "@Core/Api/api";
 import useOneModel from "@Core/Store/oneModel";
@@ -22,6 +22,7 @@ function CarouselItems({ items, sectionName }) {
     Api.getModelById(id).then((res) => setOneModel(res.data));
     navigate(`/models/${id}`);
   };
+  console.log(items);
   return (
     <div className="items_section">
       <SkeletonSection text={sectionName} infiniteLoop={true} />
@@ -33,18 +34,15 @@ function CarouselItems({ items, sectionName }) {
             key={item.id}
           >
             <LazyLoadImage
-              src={
-                item.attributes.Images.data[0].attributes.formats.medium?.url
-              }
+              src={item.Images[0].formats.medium?.url}
               alt={item?.attributes?.Name}
               effect="blur"
             />
             <div>
               <h3>
-                {item?.attributes?.mark?.data?.attributes?.Name}{" "}
-                {item?.attributes?.Name}
+                {item?.mark?.Name} {item?.Name}
               </h3>
-              <p className="price">Price: {item.attributes.Price}</p>
+              <p className="price">Price: {item.Price}</p>
             </div>
           </div>
         ))}

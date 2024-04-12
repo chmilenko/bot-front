@@ -1,4 +1,4 @@
-import {  useEffect, Suspense } from "react";
+import { useEffect, Suspense } from "react";
 
 import Header from "@Components/Header/Header";
 import LogoSection from "@Components/LogoSection/LogoSection";

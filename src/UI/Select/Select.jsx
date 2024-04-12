@@ -18,7 +18,7 @@ function SelectComponent({ className, options }) {
       className={`select ${className ? "" : className}`}
     >
       {options?.data?.map((option) => (
-        <option key={option.id}>{option.attributes.Name}</option>
+        <option key={option.id}>{option.Name}</option>
       ))}
     </select>
   );
