@@ -6,7 +6,7 @@ import CarouselItems from "@Components/Carousel/CarouselItems";
 import Basket from "@Components/Basket/Basket";
 import Loader from "@Components/Loader/Loader";
 
-import useModels from "@Core/Store/models";
+import useModels from "@Core/Store/models"; 
 import Api from "@Core/Api/api";
 import useMarks from "@Core/Store/marks";
 
