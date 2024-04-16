@@ -1,5 +1,5 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 
 import Basket from "@Components/Basket/Basket";
@@ -10,12 +10,15 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import useOneModel from "@Core/Store/oneModel";
+import Api from "@Core/Api/api";
+import { useEffect } from "react";
 
+// import { useOrder } from "@Core/Store/order";
 
 function ModelInfo() {
-  const { oneModel } = useOneModel();
+  const { oneModel, setOneModel } = useOneModel();
   let navigate = useNavigate();
-
+  let id = useParams();
   const [selectedSizes, setSelectedSizes] = useState([]);
 
   const handleSizeClick = (size) => {
@@ -26,6 +29,27 @@ function ModelInfo() {
     }
   };
 
+  useEffect(() => {
+    Api.getModelById(id).then((res) => setOneModel(res.data));
+  }, [id, setOneModel]);
+  const setOrder = () => {
+    // Создаем объект данных, соответствующий требуемой структуре
+    const data = {
+      data: {
+        User: "@Test", 
+        models: [id],
+        sizes: selectedSizes.map((size) => ({ id: size.id })), 
+      },
+    };
+    console.log(data);
+    Api.postOrder(data)
+      .then((response) => {
+        console.log("Заказ успешно создан:", response);
+      })
+      .catch((error) => {
+        console.error("Ошибка при создании заказа:", error);
+      });
+  };
   return (
     <div className="container_model">
       <div onClick={() => navigate(-1)}>Назад</div>
@@ -50,6 +74,9 @@ function ModelInfo() {
           ))}
         </div>
         <div className="description">{oneModel?.data?.Description}</div>
+        {selectedSizes.length && (
+          <button onClick={setOrder}>Сделать заказ</button>
+        )}
       </div>
       <Basket />
     </div>

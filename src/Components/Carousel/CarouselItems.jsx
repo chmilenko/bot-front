@@ -10,18 +10,14 @@ import SkeletonSection from "@Components/SkeletonSection/SkeletonSection";
 import "./carousel.scss";
 import { useNavigate } from "react-router-dom";
 
-import Api from "@Core/Api/api";
-import useOneModel from "@Core/Store/oneModel";
 
 import Skeleton from "react-loading-skeleton";
 
 function CarouselItems({ items, sectionName }) {
+  
   let navigate = useNavigate();
 
-  const { setOneModel } = useOneModel();
-
   const handleSetOneModel = (id) => {
-    Api.getModelById(id).then((res) => setOneModel(res.data));
     navigate(`/models/${id}`);
   };
 

@@ -1,0 +1,22 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+  th,
+  tr,
+  td {
+    border: 1px solid rgb(126, 122, 122);
+    text-align: center;
+    height: 3.2vh;
+  }
+  .sizes_count {
+    display: flex;
+    justify-content: space-between;
+    .size,
+    .count {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

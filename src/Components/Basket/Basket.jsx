@@ -1,8 +1,12 @@
 import "./basket.scss";
 import { useState } from "react";
 
+// import { useOrder } from "@Core/Store/order";
+
 function Basket() {
   const [modalOpen, setModalOpen] = useState(false);
+
+  // const { price } = useOrder();
 
   const toggleModal = () => {
     if (modalOpen) {
