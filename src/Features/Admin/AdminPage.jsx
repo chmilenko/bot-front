@@ -7,6 +7,7 @@ import "./admin.scss";
 import Api from "@Core/Api/api";
 
 import useModels from "@Core/Store/models";
+import Button from "../../UI/Button/Button";
 
 function AdminPage() {
   const [page, setPage] = useState("sneakers");
@@ -26,15 +27,14 @@ function AdminPage() {
   return (
     <div className="container">
       <div className="set_page">
-        <button
+        <Button
           onClick={() => handleSetPage("sneakers")}
-          className="page_button"
-        >
-          КРОССОВКИ
-        </button>
-        <button onClick={() => handleSetPage("orders")} className="page_button">
-          ЗАКАЗЫ
-        </button>
+          text="Кроссовки"
+        />
+        <Button
+          onClick={() => handleSetPage("orders")}
+          text="Заказы"
+        />
       </div>
       <div>
         {page === "sneakers" && <Sneakers />}

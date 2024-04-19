@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  .model_info,
+  .image_model {
+    width: 50%;
+  }
+  .model_info {
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+  }
+  .child {
+    display: flex;
+    flex-direction: row;
+    gap: 3vh;
+  }
+  .control-dots,
+  .carousel-status,
+  .carousel-dots,
+  .thumbs {
+    display: none;
+  }
+}

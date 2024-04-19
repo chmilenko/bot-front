@@ -3,6 +3,7 @@ import Home from "../Features/Home/Home";
 import "../Styles/main.scss";
 import ModelInfo from "../Features/ModelInfo/ModelInfo";
 import AdminPage from "../Features/Admin/AdminPage";
+import ModelAdmin from "../Features/Admin/Components/ModelAdmin/ModelAdmin";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Route element={<Home />} path="/" />
       <Route element={<ModelInfo />} path="/models/:id" />
       <Route element={<AdminPage />} path="/admin" />
+      <Route element={<ModelAdmin />} path="/admin/model/:id" />
     </Routes>
   );
 }

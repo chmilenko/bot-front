@@ -1,0 +1,10 @@
+.container_sneakers {
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+  .core_sneakers {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

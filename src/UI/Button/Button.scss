@@ -1,0 +1,19 @@
+@import "@Styles/main.scss";
+
+.btn{
+  background-image: $primary-color;
+  width: 15vh;
+  height: 30px;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  color: rgb(87, 83, 83);
+  font-size: 16px;
+  font-weight: 700;
+  &:active {
+    background-image: $primary-color-active-btn;
+  }
+  &:hover {
+    background-image: $primary-color-active-btn;
+  }
+}

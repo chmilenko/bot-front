@@ -1,8 +1,16 @@
+@import "@Styles/main.scss";
+
 .input {
-  background-color: #51a5ab;
+  background-image: $primary-color;
   border-radius: 8px;
   padding: 8px 16px;
   outline: none;
   border: none;
   color: aqua;
+  width: 300px;
+  height: 50px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }

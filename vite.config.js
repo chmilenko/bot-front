@@ -9,12 +9,12 @@ export default defineConfig({
     alias: {
       "@assets": path.resolve(__dirname, "src/assets"),
       "@Components": path.resolve(__dirname, "src/Components"),
-      "@hooks": path.resolve(__dirname, "src/Hooks"),
+      "@Hooks": path.resolve(__dirname, "src/Hooks"),
       "@Ui": path.resolve(__dirname, "src/UI"),
       "@Utils": path.resolve(__dirname, "src/Utils"),
       "@Features": path.resolve(__dirname, "src/Features"),
       "@Core": path.resolve(__dirname, "src/Core"),
-
+      "@Styles": path.resolve(__dirname, "src/Styles"),
     },
   },
   proxy: {

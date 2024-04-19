@@ -15,9 +15,17 @@ const Api = {
     getModelById(id) {
       return instance.get(`/sneakers/${id}`)
     },
-    postOrder(data) {
-      return instance.post(`/orders`, {
-        body: {data: data}
+    addNewSneakers(data) {
+      return instance.post(`/sneakers`, {
+       data
+      })
+    },
+    addPhotoSneakers(id, formData) {
+      console.log("ADADAL", formData);
+      return instance.post(`/sneakers/photos/${id}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        }
       })
     }
   };

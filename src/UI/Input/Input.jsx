@@ -1,13 +1,27 @@
 import "./Input.scss";
 
 // eslint-disable-next-line react/prop-types
-function Input({ text, className }) {
-  return (
-    <input
-      className={`input${className ? "" : " " + className}`}
-      placeholder={text}
-    />
-  );
+function Input({ text, className, type, value, setValue, file }) {
+  if (file) {
+    return (
+      <input
+        className={`input${!className ? "" : "_" + className}`}
+        placeholder={text}
+        type={type ? type : "file"}
+        onChange={(e) => setValue(e.target.files[0])}
+      />
+    );
+  } else {
+    return (
+      <input
+        className={`input${!className ? "" : "_" + className}`}
+        placeholder={text}
+        type={type ? type : "text"}
+        onChange={(e) => setValue(e.target.value)}
+        value={value}
+      />
+    );
+  }
 }
 
 export default Input;

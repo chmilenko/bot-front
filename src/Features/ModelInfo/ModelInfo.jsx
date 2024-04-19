@@ -33,7 +33,7 @@ function ModelInfo() {
     Api.getModelById(id).then((res) => setOneModel(res.data));
   }, [id, setOneModel]);
   const setOrder = () => {
-    // Создаем объект данных, соответствующий требуемой структуре
+
     const data = {
       data: {
         User: "@Test", 

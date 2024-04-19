@@ -1,3 +1,5 @@
+@import "@Styles/variables.scss";
+
 table {
   border-collapse: collapse;
   width: 100%;
@@ -7,6 +9,11 @@ table {
     border: 1px solid rgb(126, 122, 122);
     text-align: center;
     height: 3.2vh;
+  }
+  tr:hover {
+    background-image: $primary-color;
+    cursor: pointer;
+    font-size: 18px;
   }
   .sizes_count {
     display: flex;
