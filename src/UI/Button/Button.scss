@@ -1,6 +1,6 @@
 @import "@Styles/main.scss";
 
-.btn{
+.btn {
   background-image: $primary-color;
   width: 15vh;
   height: 30px;
@@ -16,4 +16,14 @@
   &:hover {
     background-image: $primary-color-active-btn;
   }
+}
+.btn_back {
+  font-weight: 600;
+  font-size: 14px;
+  color: #138797;
+  border: 1px solid #138797;
+  border-radius: 12px;
+  padding: 10px 16px;
+  width: 73px;
+  height: 37px;
 }

@@ -12,6 +12,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import useOneModel from "@Core/Store/oneModel";
 import Api from "@Core/Api/api";
 import { useEffect } from "react";
+import Button from "../../UI/Button/Button";
 
 // import { useOrder } from "@Core/Store/order";
 
@@ -30,18 +31,17 @@ function ModelInfo() {
   };
 
   useEffect(() => {
-    Api.getModelById(id).then((res) => setOneModel(res.data));
+    Api.getModelById(id.id).then((res) => setOneModel(res.data));
   }, [id, setOneModel]);
   const setOrder = () => {
-
     const data = {
       data: {
-        User: "@Test", 
+        User: "@Test",
         models: [id],
-        sizes: selectedSizes.map((size) => ({ id: size.id })), 
+        sizes: selectedSizes.map((size) => ({ id: size.id })),
       },
     };
-    console.log(data);
+    console.log(oneModel);
     Api.postOrder(data)
       .then((response) => {
         console.log("Заказ успешно создан:", response);
@@ -52,31 +52,42 @@ function ModelInfo() {
   };
   return (
     <div className="container_model">
-      <div onClick={() => navigate(-1)}>Назад</div>
-      <Carousel useKeyboardArrows={true} showThumbs={false}>
-        {oneModel?.data?.Images.map((img) => (
-          <LazyLoadImage src={img.formats.medium.url} key={img.id} />
-        ))}
-      </Carousel>
-      <div className="model_info">
-        <h3 className="name_model">
-          {oneModel?.data?.mark?.Name} {oneModel?.data?.Name}
-        </h3>
-        <div className="sizes">
-          {oneModel?.data?.sizes?.map((size, i) => (
-            <button
-              key={i}
-              className={selectedSizes.includes(size) ? "size_active" : "size"}
-              onClick={() => handleSizeClick(size)}
-            >
-              {size.size}
-            </button>
+      <Button onClick={() => navigate(-1)} text="Назад" className="back" />
+      <div className="model">
+        <Carousel useKeyboardArrows={true} showThumbs={false}>
+          {oneModel?.photos.map((img) => (
+            <LazyLoadImage
+              src={`http://localhost:4000${img.photo}`}
+              key={img.id}
+              className="sneaker_image"
+            />
           ))}
+        </Carousel>
+        <div className="model_info">
+          <h3 className="name_model">
+            {oneModel?.mark} {oneModel?.name}
+          </h3>
+          <p>{oneModel?.description}</p>
+
+          <div className="sizes">
+            {oneModel?.sizes?.map((size, i) => (
+              <button
+                key={i}
+                className={
+                  selectedSizes.includes(size) ? "size_active" : "btn_size"
+                }
+                onClick={() => handleSizeClick(size)}
+              >
+                {size.size}
+              </button>
+            ))}
+          </div>
+          <hr />
+          <h3 className="price">{oneModel?.price}</h3>
+          {!!selectedSizes.length && (
+            <button onClick={setOrder}>Сделать заказ</button>
+          )}
         </div>
-        <div className="description">{oneModel?.data?.Description}</div>
-        {selectedSizes.length && (
-          <button onClick={setOrder}>Сделать заказ</button>
-        )}
       </div>
       <Basket />
     </div>

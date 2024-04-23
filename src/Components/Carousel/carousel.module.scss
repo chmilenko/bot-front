@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+  .name_container {
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    .section_name {
+      font-weight: 600;
+      font-size: 32px;
+      color: #fff;
+    }
+  }
+  .items_section {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05);
+    background: #fff;
+    border-radius: 16px;
+    hr {
+      padding: 0;
+      height: 0;
+      border: none;
+      border-top: 1px dashed #138797;
+      width: 100%;
+    }
+  }
+}

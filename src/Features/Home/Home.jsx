@@ -1,19 +1,19 @@
-import { useEffect, Suspense } from "react";
+import { useEffect, Suspense, useState } from "react";
 
 import Header from "@Components/Header/Header";
-import LogoSection from "@Components/LogoSection/LogoSection";
 import CarouselItems from "@Components/Carousel/CarouselItems";
 import Basket from "@Components/Basket/Basket";
 import Loader from "@Components/Loader/Loader";
 
 import useModels from "@Core/Store/models";
 import Api from "@Core/Api/api";
-import useMarks from "@Core/Store/marks";
 
-import "./home.scss";
+
+import style from "./home.module.scss";
+import AllModels from "../AllModels/AllModels";
 
 const HomeDataLoader = () => {
-  const { marks, setMarks } = useMarks();
+  const [blur, setBlur] = useState(false);
   const {
     setModelsNike,
     setModelsAdidas,
@@ -25,36 +25,34 @@ const HomeDataLoader = () => {
 
   useEffect(() => {
     const getModelsByMark = async (markName, setModels) => {
-      const res = await Api.getModelsByMark(markName);
-      setModels(res.data.data);
+      const res = await Api.getAllSneakers(markName);
+      setModels(res.data);
     };
     Promise.all([
       getModelsByMark("Nike", setModelsNike),
       getModelsByMark("Adidas", setModelsAdidas),
-      getModelsByMark("Rick Owens", setModelsRickOwens),
-      Api.getMarks().then((res) => setMarks(res.data)),
+      getModelsByMark("New Balance", setModelsRickOwens),
     ]);
-  }, [setModelsNike, setModelsAdidas, setModelsRickOwens, setMarks]);
+  }, [setModelsNike, setModelsAdidas, setModelsRickOwens]);
 
   return (
     <>
-      <div className="container">
-        <Header marks={marks} />
-
-        {modelsAdidas.length && modelsNike.length && modelsRickOwens.length ? (
+      <div className={style.container}>
+        <Header blur={blur} onFocus={setBlur} />
+        {!blur && (
           <>
             <CarouselItems items={modelsNike} sectionName="NIKE" />
             <CarouselItems items={modelsAdidas} sectionName="ADIDAS" />
-            <CarouselItems items={modelsRickOwens} sectionName="RICK OWENS" />
+            <CarouselItems items={modelsRickOwens} sectionName="NEW BALANCE" />
           </>
-        ) : (
-          <Loader />
         )}
-        <Basket />
-        <div className="logo_section">
-          <LogoSection />
-        </div>
+        {blur && (
+          <>
+            <AllModels />
+          </>
+        )}
       </div>
+      <Basket />
     </>
   );
 };

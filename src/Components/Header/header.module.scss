@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 0 0 10% 10%;
+  padding: 16px;
+  gap: 3vh;
+  .logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 3vh;
+  }
+  .name {
+    font-weight: 900;
+    font-size: 20px;
+    text-align: center;
+    color: #fff;
+  }
+  .main_logo {
+    width: 76px;
+    height: 76px;
+  }
+  .header_focus {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+}

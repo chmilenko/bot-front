@@ -1,0 +1,29 @@
+.product {
+  padding: 8px 0px;
+  .main_img {
+    border-radius: 16px;
+    width: 90%;
+    height: 70%;
+    border-radius: 16px;
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 8px;
+    width: 100%;
+    gap: 2vh;
+    .name,
+    .price {
+      display: flex;
+      justify-content: flex-start;
+      text-transform: uppercase;
+    }
+    .price {
+      font-weight: 600;
+      font-size: 18px;
+      color: #2f4b4e;
+    }
+  }
+}
+
