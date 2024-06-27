@@ -1,18 +1,22 @@
-import React, { useState } from "react";
-import "./Auth.scss";
-import Input from "@Ui/Input/Input";
-import Button from "../../UI/Button/Button";
-import Api from "../../Core/Api/api";
+import { useState } from "react";
 import { useCookies } from "react-cookie";
+
+import "./Auth.scss";
+
+import Input from "@Ui/Input/Input";
+import Button from "@Ui/Button/Button";
+
+import Api from "../../Core/Api/api";
 import useAdminStore from "../../Core/Store/admin";
 import { useNavigate } from "react-router-dom";
 
 function Auth() {
   const { user, setUser } = useAdminStore();
+  // eslint-disable-next-line no-unused-vars
   const [cookies, setCookie] = useCookies(["token"]);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
-  // Используем состояние из Zustand store
+
   const handleClickAuthenication = async () => {
     const data = {
       login: user.login,
@@ -23,7 +27,7 @@ function Auth() {
       const res = await Api.authenication(data);
       if (res.status === 201) {
         setCookie("token", res.data.token);
-        setUser({ auth: true }); // Обновляем статус авторизации
+        setUser({ auth: true });
         navigate("/admin");
       } else {
         setError(true);

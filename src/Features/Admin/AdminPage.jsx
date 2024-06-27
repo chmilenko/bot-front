@@ -1,41 +1,60 @@
 import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
+
+import "./admin.scss";
+
 import Sneakers from "./Components/SneakersPage.jsx/Sneakers";
 import Orders from "./Components/OrdersPage/Orders";
 
-import "./admin.scss";
+import Button from "../../UI/Button/Button";
 
 import Api from "@Core/Api/api";
 
 import useModels from "@Core/Store/models";
 import useAdminStore from "../../Core/Store/admin";
-import Button from "../../UI/Button/Button";
-import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
 
 function AdminPage() {
-  const [page, setPage] = useState("sneakers");
-  const { deleteUser, user } = useAdminStore();
+  const { deleteUser } = useAdminStore();
   const { setAllModels } = useModels();
-  const [removeCookie] = useCookies(["token"]);
+  const [cookies] = useCookies();
 
   const navigate = useNavigate();
+  const [page, setPage] = useState("sneakers");
+  const [removeCookie] = useCookies(["token"]);
 
   const handleSetPage = (name) => {
     setPage(name);
   };
 
   useEffect(() => {
-    if (user.auth) {
-      Api.getAllSneakers()
-        .then((res) => setAllModels(res.data))
-        .catch((error) => console.log(error));
-    } else navigate("/auth");
-  }, [navigate, setAllModels, user.auth]);
+    const checkToken = async () => {
+      try {
+        const res = await Api.checkToken(cookies.token);
+        if (res.data.valid) {
+          Api.getAllSneakers()
+            .then((res) => setAllModels(res.data))
+            .catch((error) => console.log(error));
+        } else {
+          navigate("/auth");
+        }
+      } catch (error) {
+        console.error("Failed to check token", error);
+        navigate("/auth");
+      }
+    };
+
+    if (cookies.token) {
+      checkToken();
+    } else {
+      navigate("/auth");
+    }
+  }, [cookies.token, navigate, setAllModels]);
 
   const logout = () => {
-    deleteUser(); // Очистка состояния пользователя в Zustand store
-    removeCookie("token"); // Удаление куки с токеном
-    navigate("/auth"); // Редирект на страницу авторизации
+    deleteUser();
+    removeCookie("token");
+    navigate("/auth");
   };
 
   return (

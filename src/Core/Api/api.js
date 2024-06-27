@@ -11,6 +11,11 @@ const Api = {
         data
       })
     },
+    checkToken(token) {
+      return instance.post('/token', {
+        token
+      })
+    },
     getModelsByMark() {
       return instance.get(`/sneakers/mark`);
     },

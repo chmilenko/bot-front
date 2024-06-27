@@ -5,13 +5,8 @@ import ModelInfo from "../Features/ModelInfo/ModelInfo";
 import AdminPage from "../Features/Admin/AdminPage";
 import ModelAdmin from "../Features/Admin/Components/ModelAdmin/ModelAdmin";
 import Auth from "../Features/Auth/Auth";
-import { useCookies } from "react-cookie";
-import useAdminStore from "../Core/Store/admin";
 
 function App() {
-  // const [cookies] = useCookies();
-  const { user } = useAdminStore();
-  console.log(user);
   return (
     <Routes>
       <Route element={<Home />} path="/" />
