@@ -15,10 +15,10 @@ import useSize from "../../Core/Store/size";
 import useAdminStore from "../../Core/Store/admin";
 
 function AdminPage() {
-  const { deleteUser } = useAdminStore();
+  const { deleteUser, setUser, user } = useAdminStore();
   const { setAllModels } = useModels();
   const { setSizes } = useSize();
-  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  const [cookies, removeCookie] = useCookies(["token"]);
 
   const navigate = useNavigate();
   const [page, setPage] = useState("sneakers");
@@ -32,10 +32,13 @@ function AdminPage() {
       try {
         const res = await Api.checkToken(cookies.token);
         if (res.data.valid) {
+          setUser({ auth: true }); // Устанавливаем auth: true
           Api.getAllSneakers()
             .then((res) => setAllModels(res.data))
             .catch((error) => console.log(error));
-          Api.getSizes().then((res) => setSizes(res)).catch((error) => console.log(error));
+          Api.getSizes()
+            .then((res) => setSizes(res))
+            .catch((error) => console.log(error));
         } else {
           navigate("/auth");
         }
@@ -50,7 +53,7 @@ function AdminPage() {
     } else {
       navigate("/auth");
     }
-  }, [cookies.token, navigate, setAllModels]);
+  }, [cookies.token, navigate, setAllModels, setSizes, setUser]);
 
   const logout = () => {
     deleteUser();

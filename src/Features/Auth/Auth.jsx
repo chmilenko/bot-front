@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
 import "./Auth.scss";
 
@@ -8,11 +9,9 @@ import Button from "@Ui/Button/Button";
 
 import Api from "../../Core/Api/api";
 import useAdminStore from "../../Core/Store/admin";
-import { useNavigate } from "react-router-dom";
 
 function Auth() {
   const { user, setUser } = useAdminStore();
-  // eslint-disable-next-line no-unused-vars
   const [cookies, setCookie] = useCookies(["token"]);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
@@ -27,7 +26,7 @@ function Auth() {
       const res = await Api.authenication(data);
       if (res.status === 201) {
         setCookie("token", res.data.token);
-        setUser({ auth: true });
+        setUser({ ...user, auth: true }); // Устанавливаем auth: true
         navigate("/admin");
       } else {
         setError(true);
@@ -38,6 +37,12 @@ function Auth() {
     }
   };
 
+  useEffect(() => {
+    if (user.auth && cookies.token) {
+      navigate("/admin");
+    }
+  }, [cookies.token, navigate, user.auth]);
+
   return (
     <div className="container">
       <h3 className="container-title">Добро пожаловать работяга!</h3>
@@ -45,12 +50,12 @@ function Auth() {
         <Input
           text="Логин"
           value={user.login}
-          setValue={(value) => setUser({ login: value })}
+          setValue={(value) => setUser({ ...user, login: value })}
         />
         <Input
           text="Пароль"
           value={user.password}
-          setValue={(value) => setUser({ password: value })}
+          setValue={(value) => setUser({ ...user, password: value })}
           type="password"
         />
       </div>
