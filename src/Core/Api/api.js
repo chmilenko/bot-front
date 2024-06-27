@@ -22,6 +22,9 @@ const Api = {
     getAllSneakers(mark) {
       return instance.get(`/sneakers?mark=${mark ? mark : ''}`)
     },
+    getSizes() {
+    return instance.get('/sizes')
+    },
     getModelById(id) {
       return instance.get(`/sneakers/${id}`)
     },

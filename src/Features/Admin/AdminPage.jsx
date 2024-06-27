@@ -10,18 +10,18 @@ import Orders from "./Components/OrdersPage/Orders";
 import Button from "../../UI/Button/Button";
 
 import Api from "@Core/Api/api";
-
 import useModels from "@Core/Store/models";
+import useSize from "../../Core/Store/size";
 import useAdminStore from "../../Core/Store/admin";
 
 function AdminPage() {
   const { deleteUser } = useAdminStore();
   const { setAllModels } = useModels();
-  const [cookies] = useCookies();
+  const { setSizes } = useSize();
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
 
   const navigate = useNavigate();
   const [page, setPage] = useState("sneakers");
-  const [removeCookie] = useCookies(["token"]);
 
   const handleSetPage = (name) => {
     setPage(name);
@@ -35,6 +35,7 @@ function AdminPage() {
           Api.getAllSneakers()
             .then((res) => setAllModels(res.data))
             .catch((error) => console.log(error));
+          Api.getSizes().then((res) => setSizes(res)).catch((error) => console.log(error));
         } else {
           navigate("/auth");
         }
@@ -64,7 +65,7 @@ function AdminPage() {
         <Button onClick={() => handleSetPage("orders")} text="Заказы" />
         <Button onClick={() => logout()} text="Выйти" />
       </div>
-      <div>
+      <div className="content">
         {page === "sneakers" && <Sneakers />}
         {page === "orders" && <Orders />}
       </div>

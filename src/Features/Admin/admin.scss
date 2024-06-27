@@ -1,6 +1,7 @@
 @import "@Styles/main.scss";
 
 .container {
+  width: 100%;
   .set_page {
     display: flex;
     justify-content: center;
@@ -17,5 +18,8 @@
       font-size: 16px;
       font-weight: 700;
     }
+  }
+  .content {
+    width: 100%;
   }
 }

@@ -1,26 +1,44 @@
 /* eslint-disable react/prop-types */
-
 import { useState } from "react";
 
 import "./Select.scss";
 
-function SelectComponent({ className, options }) {
-  const [mark, setValue] = useState();
-
+function SelectComponent({
+  className,
+  options,
+  label,
+  name,
+  value,
+  setValue,
+  multiple = false,
+}) {
   const handleOnChange = (event) => {
-    setValue(event.target.value);
+    const { options } = event.target;
+    const selectedValues = [];
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].selected) {
+        selectedValues.push(options[i].value);
+      }
+    }
+    setValue(multiple ? selectedValues : selectedValues[0]);
   };
 
   return (
-    <select
-      value={mark}
-      onChange={(e) => handleOnChange(e.target.value)}
-      className={`select ${className ? "" : className}`}
-    >
-      {options?.data?.map((option) => (
-        <option key={option.id}>{option.Name}</option>
-      ))}
-    </select>
+    <label className="select-label">
+      {label}
+      <select
+        value={value}
+        onChange={handleOnChange}
+        className={`select ${className ? className : ""}`}
+        multiple={multiple}
+      >
+        {options?.data?.map((option) => (
+          <option key={option.id} value={option[name]}>
+            {option[name]}
+          </option>
+        ))}
+      </select>
+    </label>
   );
 }
 

@@ -30,21 +30,50 @@ function ModelAdmin() {
         <Input value={price} setValue={setPrice} />
         {sizeCounts.map((el, i) => (
           <div key={i} className={style.child}>
-            <Input text="Размер" type="number" value={el.size} />
-            <Input text="Количество" type="number" value={el.count} />
+            <Input
+              text="Размер"
+              type="number"
+              value={el.size}
+              setValue={(value) =>
+                setSizesCount((prevState) =>
+                  prevState.map((item, idx) =>
+                    idx === i ? { ...item, size: value } : item
+                  )
+                )
+              }
+            />
+            <Input
+              text="Количество"
+              type="number"
+              value={el.count}
+              setValue={(value) =>
+                setSizesCount((prevState) =>
+                  prevState.map((item, idx) =>
+                    idx === i ? { ...item, count: value } : item
+                  )
+                )
+              }
+            />
           </div>
         ))}
       </div>
-      <div className="image_model">
-        <Carousel>
+      <div className={style.image_model}>
+        <Carousel
+          useKeyboardArrows={true}
+          showThumbs={false}
+          infiniteLoop={true}
+        >
           {oneModel?.photos?.map((photo) => (
-            <img
-              src={`http://localhost:4000/${photo.photo}`}
-              style={{ width: "150px" }}
-              key={photo.id}
-            />
+            // eslint-disable-next-line react/jsx-key
+            <div className={style.image_model_item}>
+              <img
+                src={`http://localhost:4000/${photo.photo}`}
+                style={{ width: "350px" }}
+                key={photo.id}
+              />
+              <Button text="Изменить" />
+            </div>
           ))}
-          <Button text="Изменить" />
         </Carousel>
       </div>
     </div>

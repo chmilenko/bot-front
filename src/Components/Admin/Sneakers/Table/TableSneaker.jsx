@@ -1,19 +1,18 @@
 import Table from "@Components/Table/Table";
-import useModels from "@Core/Store/models";
 import { useNavigate } from "react-router-dom";
 
-function TableSneakers() {
-  const { allModels } = useModels();
-
+// eslint-disable-next-line react/prop-types
+function TableSneakers({ models }) {
   const navigate = useNavigate();
 
-  const tableBody = allModels?.map((sneaker) => (
+  // eslint-disable-next-line react/prop-types
+  const tableBody = models?.map((sneaker) => (
     <tr
       key={sneaker.id}
       onClick={() => navigate(`/admin/model/${String(sneaker.id)}`)}
     >
       <td>{sneaker.id}</td>
-      <td>{sneaker?.Mark?.name}</td>
+      <td>{sneaker?.mark}</td>
       <td>{sneaker.name}</td>
       <td>
         {sneaker.sizes.map((size) => (
