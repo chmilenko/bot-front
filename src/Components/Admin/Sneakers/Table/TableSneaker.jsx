@@ -6,7 +6,7 @@ function TableSneakers() {
   const { allModels } = useModels();
 
   const navigate = useNavigate();
-  console.log(allModels);
+
   const tableBody = allModels?.map((sneaker) => (
     <tr
       key={sneaker.id}

@@ -1,10 +1,11 @@
+import { useState } from "react";
+
 import TableSneakers from "@Components/Admin/Sneakers/Table/TableSneaker";
 import Button from "@Ui/Button/Button";
+import Modal from "@Components/Modal/Modal";
+import NewSneakers from "@Components/Admin/Sneakers/NewSneakers/NewSneakers";
 
 import "./sneaker.scss";
-import { useState } from "react";
-import Modal from "../../../../Components/Modal/Modal";
-import NewSneakers from "../../../../Components/Admin/Sneakers/NewSneakers/NewSneakers";
 
 function Sneakers() {
   const [modalOpen, setModalOpen] = useState(false);

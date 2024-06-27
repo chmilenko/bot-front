@@ -2,7 +2,6 @@ import { useEffect, Suspense, useState } from "react";
 
 import Header from "@Components/Header/Header";
 import CarouselItems from "@Components/Carousel/CarouselItems";
-import Basket from "@Components/Basket/Basket";
 import Loader from "@Components/Loader/Loader";
 
 import useModels from "@Core/Store/models";
@@ -52,7 +51,6 @@ const HomeDataLoader = () => {
           </>
         )}
       </div>
-      <Basket />
     </>
   );
 };

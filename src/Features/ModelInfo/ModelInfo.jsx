@@ -5,6 +5,7 @@ import { useState } from "react";
 import Basket from "@Components/Basket/Basket";
 
 import "./model.scss";
+import main from "@assets/logo/black.png";
 
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -33,16 +34,18 @@ function ModelInfo() {
   useEffect(() => {
     Api.getModelById(id.id).then((res) => setOneModel(res.data));
   }, [id, setOneModel]);
+
   const setOrder = () => {
-    const data = {
-      data: {
-        User: "@Test",
-        models: [id],
-        sizes: selectedSizes.map((size) => ({ id: size.id })),
-      },
-    };
-    console.log(oneModel);
-    Api.postOrder(data)
+    const orderItems = selectedSizes.map((size) => ({
+      model_id: id.id,
+      size_id: size.size_id,
+      count_id: 2,
+    }));
+
+    Api.postOrder({
+      user: "@Test",
+      items: orderItems,
+    })
       .then((response) => {
         console.log("Заказ успешно создан:", response);
       })
@@ -52,10 +55,17 @@ function ModelInfo() {
   };
   return (
     <div className="container_model">
-      <Button onClick={() => navigate(-1)} text="Назад" className="back" />
+      <div className="header_child">
+        <Button onClick={() => navigate(-1)} text="Назад" className="back" />
+        <img alt="logo" src={main} className="main_logo" />
+      </div>
       <div className="model">
-        <Carousel useKeyboardArrows={true} showThumbs={false}>
-          {oneModel?.photos.map((img) => (
+        <Carousel
+          useKeyboardArrows={true}
+          showThumbs={false}
+          infiniteLoop={true}
+        >
+          {oneModel?.photos?.map((img) => (
             <LazyLoadImage
               src={`http://localhost:4000${img.photo}`}
               key={img.id}

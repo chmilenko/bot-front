@@ -15,6 +15,8 @@ function NewSneakers() {
   const [mark, setMark] = useState();
   const [model, setModel] = useState();
   const [price, setPrice] = useState();
+  const [description, setdDescription] = useState();
+
   const [sizeCounts, setSizesCount] = useState([{ size: "", count: "" }]);
 
   const [mainPhoto, setMainPhoto] = useState(null);
@@ -52,6 +54,7 @@ function NewSneakers() {
     const data = {
       mark,
       model,
+      description,
       price,
       sizeCounts,
     };
@@ -93,6 +96,9 @@ function NewSneakers() {
           </div>
         ))}
         <Button text="Добавить размер" onClick={addSizeCount} />
+      </div>
+      <div>
+        <Input text="Описание" value={description} setValue={setdDescription} />
       </div>
       <div className="files">
         <Input

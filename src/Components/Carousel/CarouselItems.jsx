@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable react/prop-types */
-import { useNavigate } from "react-router-dom";
 
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -14,11 +13,7 @@ import style from "./carousel.module.scss";
 import Product from "../Product/Product";
 
 function CarouselItems({ items, sectionName }) {
-  let navigate = useNavigate();
 
-  const handleSetOneModel = (id) => {
-    navigate(`/models/${id}`);
-  };
 
   return (
     <div className={style.container}>
@@ -33,7 +28,7 @@ function CarouselItems({ items, sectionName }) {
           infiniteLoop={true}
         >
           {items?.map((item) => (
-            <Product product={item} onClick={handleSetOneModel}/>
+            <Product product={item}/>
           ))}
         </Carousel>
       </div>

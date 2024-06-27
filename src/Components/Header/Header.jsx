@@ -26,7 +26,7 @@ function Header({ blur, onFocus }) {
         </div>
       )}
       <div>
-        <Input text="Поиск" blur={blur} onFocus={onFocus} />
+        <Input text={"Поиск"} blur={blur} onFocus={onFocus} />
       </div>
     </div>
   );

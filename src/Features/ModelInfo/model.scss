@@ -4,13 +4,22 @@
   gap: 3vh;
   width: 100%;
   padding: 8px 16px;
+  .header_child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .main_logo {
+      width: 76px;
+      height: 76px;
+    }
+  }
+
   .model {
     border-radius: 16px;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05);
     background: #fff;
     .sneaker_image {
       border-radius: 16px;
-      height: 420px;
     }
     .model_info {
       display: flex;

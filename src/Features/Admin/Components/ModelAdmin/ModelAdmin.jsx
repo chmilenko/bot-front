@@ -14,10 +14,10 @@ function ModelAdmin() {
 
   const { oneModel } = useModelId(Number(id.id));
 
-  console.log(oneModel);
   const [mark, setMark] = useState(oneModel.mark);
   const [model, setModel] = useState(oneModel.name);
   const [price, setPrice] = useState(oneModel.price);
+  // eslint-disable-next-line no-unused-vars
   const [sizeCounts, setSizesCount] = useState(
     oneModel.sizes.map((el) => ({ size: el.size, count: el.count }))
   );

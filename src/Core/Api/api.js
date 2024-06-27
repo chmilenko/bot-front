@@ -6,6 +6,11 @@ const instance = axios.create({
 });
 
 const Api = {
+    authenication(data) {
+      return instance.post('/authenication', {
+        data
+      })
+    },
     getModelsByMark() {
       return instance.get(`/sneakers/mark`);
     },
@@ -27,6 +32,14 @@ const Api = {
           "Content-Type": "multipart/form-data",
         }
       })
+    },
+    postOrder(data) {
+      return instance.post(`/orders`, {
+        data
+       })
+    },
+    getOrders() {
+      return instance.get(`/orders`)
     }
   };
 
