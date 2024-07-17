@@ -1,11 +1,34 @@
 @import "@Styles/main.scss";
 
 .combined {
-  background-image: $primary-color;
-  width: 300px;
-  height: 50px;
-  border-radius: 8px;
+  width: 100%;
+  padding: 0.5em;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-radius: 16px;
   border: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   outline: none;
-  padding: 8px 16px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+}
+
+.option {
+  padding: 0.5em;
+  background-color: #fff;
+  color: #000;
+
+  &:hover {
+    background-color: #f1f1f1;
+  }
 }

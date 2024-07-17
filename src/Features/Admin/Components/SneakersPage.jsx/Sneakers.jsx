@@ -104,8 +104,10 @@ function Sneakers() {
       </div>
       {modalOpen && (
         <Modal isOpen={modalOpen} onClose={toggleModal}>
-          <Button onClick={toggleModal} text="Закрыть" />
-          <NewSneakers />
+          <div className="modal-content">
+            <Button onClick={toggleModal} text="Закрыть" />
+            <NewSneakers />
+          </div>
         </Modal>
       )}
     </div>

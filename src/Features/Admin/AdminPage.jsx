@@ -15,7 +15,7 @@ import useSize from "../../Core/Store/size";
 import useAdminStore from "../../Core/Store/admin";
 
 function AdminPage() {
-  const { deleteUser, setUser, user } = useAdminStore();
+  const { deleteUser, setUser } = useAdminStore();
   const { setAllModels } = useModels();
   const { setSizes } = useSize();
   const [cookies, removeCookie] = useCookies(["token"]);
@@ -32,7 +32,7 @@ function AdminPage() {
       try {
         const res = await Api.checkToken(cookies.token);
         if (res.data.valid) {
-          setUser({ auth: true }); // Устанавливаем auth: true
+          setUser({ auth: true });
           Api.getAllSneakers()
             .then((res) => setAllModels(res.data))
             .catch((error) => console.log(error));

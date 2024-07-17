@@ -2,6 +2,7 @@ import { Navigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import useAdminStore from "../Core/Store/admin";
 import { useEffect } from "react";
+import Api from "../Core/Api/api";
 
 const AuthRedirect = ({ children }) => {
   const { user, setUser } = useAdminStore();

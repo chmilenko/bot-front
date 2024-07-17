@@ -2,14 +2,16 @@
 
 .btn {
   background-image: $primary-color;
-  width: 15vh;
+  width: auto;
   height: 30px;
+  padding: 2px 8px;
   border: none;
   outline: none;
   border-radius: 8px;
   color: rgb(87, 83, 83);
   font-size: 16px;
   font-weight: 700;
+  cursor: pointer;
   &:active {
     background-image: $primary-color-active-btn;
   }

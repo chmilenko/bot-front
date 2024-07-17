@@ -46,8 +46,14 @@ const Api = {
         data
        })
     },
+    getStatuses() {
+      return instance.get(`/statuses`)
+    },
     getOrders() {
       return instance.get(`/orders`)
+    },
+    changeStatus(data) {
+      return instance.put('/orders/status', data)
     }
   };
 

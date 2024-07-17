@@ -10,11 +10,11 @@ table {
     text-align: center;
     height: 3.2vh;
   }
-  tr:hover {
-    background-image: $primary-color;
-    cursor: pointer;
-    font-size: 18px;
-  }
+  // tr:hover {
+  //   background-image: $primary-color;
+  //   cursor: pointer;
+  //   font-size: 18px;
+  // }
   .sizes_count {
     display: flex;
     justify-content: space-between;
@@ -25,5 +25,10 @@ table {
       align-items: center;
       justify-content: center;
     }
+  }
+  .set-status {
+    width: 100%;
+    padding: 8px;
+    cursor: pointer;
   }
 }

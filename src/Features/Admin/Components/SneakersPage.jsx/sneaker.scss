@@ -1,6 +1,7 @@
 .container_sneakers {
   display: flex;
   flex-direction: column;
+
   gap: 2vh;
   .core_sneakers {
     display: flex;
@@ -10,5 +11,15 @@
   .filters {
     display: flex;
     gap: 24px;
+  }
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    // height: 602px;
+    // width: 1092px;
+    border-radius: 16px;
+    background-color: #8eb0d3;
   }
 }

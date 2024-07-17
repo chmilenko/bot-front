@@ -3,7 +3,9 @@
   --select-focus: #101484;
   --select-arrow: var(--select-border);
 }
-
+.select-label {
+  color: white;
+}
 select {
   // styles reset, including removing the default dropdown arrow
   appearance: none;

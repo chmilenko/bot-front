@@ -1,6 +1,8 @@
+/* eslint-disable react/prop-types */
+// eslint-disable-next-line react/prop-types
+// eslint-disable-next-line no-unused-vars
 import "./Input.scss";
 
-// eslint-disable-next-line react/prop-types
 function Input({
   text,
   className,
