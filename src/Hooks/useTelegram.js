@@ -1,6 +1,6 @@
 const tg = window.Telegram.WebApp;
 
-export function ueTelegram () {
+export function useTelegram () {
 
     const onClose = () => tg.close();
 
