@@ -3,10 +3,10 @@ import { useEffect, Suspense, useState } from "react";
 import Header from "@Components/Header/Header";
 import CarouselItems from "@Components/Carousel/CarouselItems";
 import Loader from "@Components/Loader/Loader";
+import Basket from "@Components/Basket/Basket";
 
 import useModels from "@Core/Store/models";
 import Api from "@Core/Api/api";
-
 
 import style from "./home.module.scss";
 import AllModels from "../AllModels/AllModels";
@@ -43,11 +43,13 @@ const HomeDataLoader = () => {
             <CarouselItems items={modelsNike} sectionName="NIKE" />
             <CarouselItems items={modelsAdidas} sectionName="ADIDAS" />
             <CarouselItems items={modelsRickOwens} sectionName="NEW BALANCE" />
+            <Basket />
           </>
         )}
         {blur && (
           <>
             <AllModels />
+            <Basket />
           </>
         )}
       </div>

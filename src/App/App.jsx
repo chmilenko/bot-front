@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "../Features/Home/Home";
+import "../Styles/fonts/fonts.scss";
 import "../Styles/main.scss";
 import ModelInfo from "../Features/ModelInfo/ModelInfo";
 import AdminPage from "../Features/Admin/AdminPage";

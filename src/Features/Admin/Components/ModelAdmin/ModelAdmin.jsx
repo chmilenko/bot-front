@@ -19,7 +19,7 @@ function ModelAdmin() {
   const [price, setPrice] = useState(oneModel.price);
   // eslint-disable-next-line no-unused-vars
   const [sizeCounts, setSizesCount] = useState(
-    oneModel.sizes.map((el) => ({ size: el.size, count: el.count }))
+    oneModel?.sizes?.map((el) => ({ size: el.size, count: el.count }))
   );
   console.log(sizeCounts);
   return (
@@ -28,7 +28,7 @@ function ModelAdmin() {
         <Input value={mark} setValue={setMark} />
         <Input value={model} setValue={setModel} />
         <Input value={price} setValue={setPrice} />
-        {sizeCounts.map((el, i) => (
+        {sizeCounts?.map((el, i) => (
           <div key={i} className={style.child}>
             <Input
               text="Размер"
@@ -48,7 +48,7 @@ function ModelAdmin() {
               value={el.count}
               setValue={(value) =>
                 setSizesCount((prevState) =>
-                  prevState.map((item, idx) =>
+                  prevState?.map((item, idx) =>
                     idx === i ? { ...item, count: value } : item
                   )
                 )

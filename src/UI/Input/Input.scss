@@ -2,7 +2,7 @@
 
 .input {
   border-radius: 16px;
-  padding: 4px 4px 4px 8px;  
+  padding: 4px 4px 4px 8px;
   outline: none;
   border: none;
   color: aqua;
@@ -13,10 +13,11 @@
   font-size: 14px;
   color: #fff;
 }
-input::placeholder{
+input::placeholder {
   color: #fff;
+  font-family: SFProDisplayRegular;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+  -webkit-appearance: none;
 }
