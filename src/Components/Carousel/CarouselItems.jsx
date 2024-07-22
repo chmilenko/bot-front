@@ -13,8 +13,6 @@ import style from "./carousel.module.scss";
 import Product from "../Product/Product";
 
 function CarouselItems({ items, sectionName }) {
-
-
   return (
     <div className={style.container}>
       <div className={style.name_container}>
@@ -28,7 +26,7 @@ function CarouselItems({ items, sectionName }) {
           infiniteLoop={true}
         >
           {items?.map((item) => (
-            <Product product={item}/>
+            <Product product={item} key={item.id} />
           ))}
         </Carousel>
       </div>

@@ -35,10 +35,10 @@ function AdminPage() {
           setUser({ auth: true });
           Api.getAllSneakers()
             .then((res) => setAllModels(res.data))
-            .catch((error) => console.log(error));
+            .catch((error) => error);
           Api.getSizes()
             .then((res) => setSizes(res))
-            .catch((error) => console.log(error));
+            .catch((error) => error);
         } else {
           navigate("/auth");
         }

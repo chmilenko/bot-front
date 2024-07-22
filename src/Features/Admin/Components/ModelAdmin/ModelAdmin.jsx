@@ -21,7 +21,7 @@ function ModelAdmin() {
   const [sizeCounts, setSizesCount] = useState(
     oneModel?.sizes?.map((el) => ({ size: el.size, count: el.count }))
   );
-  console.log(sizeCounts);
+  sizeCounts;
   return (
     <div className={style.container}>
       <div className={style.model_info}>

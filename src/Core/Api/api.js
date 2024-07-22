@@ -34,7 +34,7 @@ const Api = {
       })
     },
     addPhotoSneakers(id, formData) {
-      console.log("ADADAL", formData);
+      ("ADADAL", formData);
       return instance.post(`/sneakers/photos/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",

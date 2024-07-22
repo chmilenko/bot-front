@@ -8,7 +8,7 @@ function useModelId(id) {
 
   useEffect(() => {
     Api.getModelById(id).then((res) => setOneModel(res.data));
-    console.log('запрос пошел');
+    ("запрос пошел");
   }, [id, setOneModel]);
 
   return { oneModel };

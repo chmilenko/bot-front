@@ -15,12 +15,13 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function ModelInfo() {
-  const { oneModel, setOneModel } = useOneModel();
-  const { addToCart, removeFromCart, removeAllCart, cartItems } =
-    useCartStore();
   let navigate = useNavigate();
-  let { id } = useParams();
+
+  const { oneModel, setOneModel } = useOneModel();
+  const { cartItems, addToCart, removeFromCart } = useCartStore();
   const [selectedSizes, setSelectedSizes] = useState([]);
+
+  let { id } = useParams();
 
   const handleSizeClick = (size) => {
     if (selectedSizes.includes(size)) {
@@ -28,16 +29,28 @@ function ModelInfo() {
       removeFromCart(id, size.size_id);
     } else {
       setSelectedSizes([...selectedSizes, size]);
-      addToCart(id, size.size_id, oneModel.price);
-      // removeAllCart();  // Удалите эту строку, если вы не хотите очищать всю корзину
+      addToCart(
+        id,
+        size.size_id,
+        Number(size.size),
+        oneModel.price,
+        size.count
+      );
     }
   };
-
-  // console.log("BBBBBBBBBBBBB:", cartItems);
 
   useEffect(() => {
     Api.getModelById(id).then((res) => setOneModel(res.data));
   }, [id, setOneModel]);
+
+  useEffect(() => {
+    const updatedSelectedSizes = selectedSizes.filter((size) =>
+      cartItems.some(
+        (item) => item.model_id === id && item.size_id === size.size_id
+      )
+    );
+    setSelectedSizes(updatedSelectedSizes);
+  }, [cartItems, id]);
 
   return (
     <div className="container_model">
