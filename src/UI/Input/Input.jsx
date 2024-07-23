@@ -3,16 +3,7 @@
 // eslint-disable-next-line no-unused-vars
 import "./Input.scss";
 
-function Input({
-  text,
-  className,
-  type,
-  value,
-  setValue,
-  file,
-  focus,
-  onFocus,
-}) {
+function Input({ text, className, type, value, setValue, file, onFocus }) {
   if (file) {
     return (
       <input

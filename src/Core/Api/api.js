@@ -54,7 +54,10 @@ const Api = {
     },
     changeStatus(data) {
       return instance.put('/orders/status', data)
-    }
+    },
+    getTypesDelivery() {
+      return instance.get('/types/delivery')
+    },
   };
 
 export default Api;

@@ -4,8 +4,10 @@ import main from "@assets/logo/black.png";
 import Input from "@Ui/Input/Input";
 import style from "./header.module.scss";
 import Button from "../../UI/Button/Button";
+import { useState } from "react";
 
 function Header({ blur, onFocus }) {
+  const [name, setName] = useState();
   return (
     <div className={style.header}>
       {!blur && (
@@ -26,7 +28,13 @@ function Header({ blur, onFocus }) {
         </div>
       )}
       <div>
-        <Input text={"Поиск"} blur={blur} onFocus={onFocus} />
+        <Input
+          text={"Поиск"}
+          blur={blur}
+          onFocus={onFocus}
+          value={name}
+          setValue={setName}
+        />
       </div>
     </div>
   );

@@ -1,0 +1,30 @@
+.type-delivery-content {
+  padding: 12px;
+  &-back {
+  }
+  &-types {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: #01b4b8;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    &-child {
+      display: flex;
+      flex-direction: column;
+      color: #fff;
+      border: 1px solid #138797;
+      border-radius: 12px;
+      padding: 8px;
+      gap: 12px;
+      &-name {
+        display: flex;
+        justify-content: space-between;
+        .increment {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
