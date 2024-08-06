@@ -58,6 +58,9 @@ const Api = {
     getTypesDelivery() {
       return instance.get('/types/delivery')
     },
+    getTypeDelivery(id) {
+      return instance.get(`/types/delivery/${id}`)
+    },
   };
 
 export default Api;

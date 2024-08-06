@@ -1,14 +1,38 @@
-import useCartStore from "@Core/Store/cart";
-import ModelsBasket from "../../../ModelsBasket";
 import { useEffect, useState } from "react";
-import Api from "@Core/Api/api";
-import Button from "@Ui/Button/Button";
+import useCartStore from "@Core/Store/cart";
+import Api from "@Core/Api/api"; // Импортируйте ваш API
 
-function Confirmation({ handleClickRefStep }) {
-  const { cartItems } = useCartStore();
-  // eslint-disable-next-line no-unused-vars
-  const [cartDetails, setCartDetails] = useState([]);
+function Confirmation({ handleClickRefStep, cartDetails, setCartDetails }) {
+  const {
+    cartItems,
+    selectedDeliveryType,
+    typePickup,
+    typeCity,
+    typeSdek,
+    user,
+  } = useCartStore();
+  const [deliveryTypeInfo, setDeliveryTypeInfo] = useState(null);
   const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    if (selectedDeliveryType !== null) {
+      Api.getTypeDelivery(selectedDeliveryType)
+        .then((response) => setDeliveryTypeInfo(response.data))
+        .catch((error) =>
+          console.error("Ошибка при загрузке типа доставки:", error)
+        );
+    }
+  }, [selectedDeliveryType]);
+  console.log(deliveryTypeInfo);
+
+  const deliveryData =
+    selectedDeliveryType === 1
+      ? typePickup
+      : selectedDeliveryType === 2
+      ? typeCity
+      : selectedDeliveryType === 3
+      ? typeSdek
+      : {};
 
   useEffect(() => {
     const fetchCartDetails = async () => {
@@ -45,14 +69,41 @@ function Confirmation({ handleClickRefStep }) {
     };
     calculateTotalPrice();
   }, [cartItems]);
+  console.log(cartItems);
+  const handleOrderSubmit = async () => {
+    try {
+      const orderData = {
+        user: "@Test",
+        items: cartItems.map((item) => ({
+          model_id: item.model_id,
+          size_id: item.size_id,
+          count_id: item.count,
+        })),
+        delivery: {
+          type_id: selectedDeliveryType,
+          data: deliveryData,
+        },
+      };
+      const response = await Api.postOrder(orderData);
+      console.log("Заказ создан:", response.data);
+      handleClickRefStep("orderConfirmed");
+    } catch (error) {
+      console.error("Ошибка при создании заказа:", error);
+    }
+  };
+
   return (
-    <div>
-      <div onClick={() => handleClickRefStep("typeDelivery")}>Назад</div>
-      <h3>Подтверждение заказа</h3>
-      <div>
-        <p>Ваш заказ:</p>
-        <>
-          {cartDetails.map((item, index) => (
+    <div className="confirmation-content">
+      <div
+        className="confirmation-content-back"
+        onClick={() => handleClickRefStep("typeDelivery")}
+      >
+        Назад
+      </div>
+      <div className="confirmation-content-details">
+        <h2>Ваш заказ</h2>
+        {cartDetails &&
+          cartDetails.map((item, index) => (
             <div key={index} className="basket-item">
               <img
                 src={`http://localhost:4000${item.photo}`}
@@ -69,18 +120,33 @@ function Confirmation({ handleClickRefStep }) {
                   </p>
                 </div>
                 <div className="basket-item-info-down">
-                  <p className="basket-item-info-price">Цена: {item.price}</p>
+                  <p className="basket-item-info-price">{item.price}</p>
                   <div className="counter">
-                    <p className="counter-count"> Количество: {item.count}</p>
+                    <p className="counter-count">{item.count}</p>
                   </div>
                 </div>
               </div>
             </div>
           ))}
-        </>
-        <p>Итоговая цена: {totalPrice}</p>
-        <Button text="Сделать заказ" />
+        <p>Цена: {totalPrice}</p>
+        <h2>Тип доставки</h2>
+        {deliveryTypeInfo ? (
+          <div>
+            <p>{deliveryTypeInfo.name}</p>
+          </div>
+        ) : (
+          <p>Загрузка информации о типе доставки...</p>
+        )}
+        <h2>Данные доставки</h2>
+        <ul>
+          {Object.keys(deliveryData).map((key) => (
+            <li key={key}>
+              {key}: {deliveryData[key]}
+            </li>
+          ))}
+        </ul>
       </div>
+      <button onClick={handleOrderSubmit}>Подтвердить заказ</button>
     </div>
   );
 }

@@ -67,7 +67,11 @@ function Basket() {
             <TypeDelivery handleClickRefStep={handleClickRefStep} />
           )}
           {step === "confirmOrder" && cartItems.length && (
-            <Confirmation handleClickRefStep={handleClickRefStep} />
+            <Confirmation
+              handleClickRefStep={handleClickRefStep}
+              cartDetails={cartDetails}
+              setCartDetails={setCartDetails}
+            />
           )}
         </div>
       </Modal>

@@ -6,9 +6,7 @@ import useCartStore from "@Core/Store/cart";
 
 import increment from "@assets/increments.svg";
 import decrement from "@assets/decrement.svg";
-import Pickup from "./TypesDelivery/City/Pickup";
-import DeliveryCity from "./TypesDelivery/DeliveryCity/DeliveryCity";
-import Sdek from "./TypesDelivery/SdekDelivery/Sdek";
+import Input from "@Ui/Input/Input";
 
 function TypeDelivery({ handleClickRefStep }) {
   const {
@@ -18,6 +16,10 @@ function TypeDelivery({ handleClickRefStep }) {
     typePickup,
     typeCity,
     typeSdek,
+    updateTypePickup,
+    updateTypeCity,
+    updateTypeSdek,
+    setSelectedDeliveryType,
   } = useCartStore();
   const [openFormId, setOpenFormId] = useState(null);
 
@@ -34,10 +36,39 @@ function TypeDelivery({ handleClickRefStep }) {
     setOpenFormId((prevId) => (prevId === id ? null : id));
   };
 
+  const handleNextStep = (id) => {
+    setSelectedDeliveryType(id);
+    handleClickRefStep("confirmOrder");
+  };
+
   const isFormValid = (formType) => {
     const form =
       formType === 1 ? typePickup : formType === 2 ? typeCity : typeSdek;
     return Object.values(form).every((value) => value.trim() !== "");
+  };
+
+  const renderForm = (formType) => {
+    const form =
+      formType === 1 ? typePickup : formType === 2 ? typeCity : typeSdek;
+    const updateForm =
+      formType === 1
+        ? updateTypePickup
+        : formType === 2
+        ? updateTypeCity
+        : updateTypeSdek;
+
+    return (
+      <div className="form-fields">
+        {Object.keys(form).map((field) => (
+          <Input
+            key={field}
+            text={field}
+            value={form[field]}
+            setValue={(value) => updateForm({ [field]: value })}
+          />
+        ))}
+      </div>
+    );
   };
 
   return (
@@ -69,16 +100,14 @@ function TypeDelivery({ handleClickRefStep }) {
               </div>
               {openFormId === el.id && (
                 <div className="type-delivery-content-types-child-form">
-                  {el.id === 1 && <Pickup />}
-                  {el.id === 2 && <DeliveryCity />}
-                  {el.id === 3 && <Sdek />}
+                  {renderForm(el.id)}
                 </div>
               )}
               <div>
                 {isFormValid(el.id) && (
                   <button
                     className="next-button"
-                    onClick={() => handleClickRefStep("confirmOrder")}
+                    onClick={() => handleNextStep(el.id)}
                   >
                     Далее
                   </button>

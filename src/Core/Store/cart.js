@@ -16,6 +16,7 @@ const useCartStore = create((set) => ({
     address: '',
     phone: '',
   },
+  selectedDeliveryType: null,
   addToCart: (model_id, size_id, size, price, totalCount) =>
     set((state) => {
       const existingItem = state.cartItems.find(
@@ -65,25 +66,27 @@ const useCartStore = create((set) => ({
       ...state,
       typeDelivery: types,
     })),
-    updateTypePickup: (data) =>
-      set((state) => ({
-        typePickup: { ...state.typePickup, ...data },
-      })),
-    updateTypeSdek: (data) =>
-      set((state) => ({
-        typeSdek: { ...state.typeSdek, ...data },
-      })),
-    updateTypeCity: (data) =>
-      set((state) => ({
-        typeCity: { ...state.typeCity, ...data },
-      })),
-    clearTypeDelivery: (type) =>
-      set((state) => ({
-        [type]: Object.keys(state[type]).reduce((acc, key) => {
-          acc[key] = "";
-          return acc;
-        }, {}),
-      })),
+  updateTypePickup: (data) =>
+    set((state) => ({
+      typePickup: { ...state.typePickup, ...data },
+    })),
+  updateTypeSdek: (data) =>
+    set((state) => ({
+      typeSdek: { ...state.typeSdek, ...data },
+    })),
+  updateTypeCity: (data) =>
+    set((state) => ({
+      typeCity: { ...state.typeCity, ...data },
+    })),
+  clearTypeDelivery: (type) =>
+    set((state) => ({
+      [type]: Object.keys(state[type]).reduce((acc, key) => {
+        acc[key] = "";
+        return acc;
+      }, {}),
+    })),
+  setSelectedDeliveryType: (deliveryType) => 
+    set({ selectedDeliveryType: deliveryType }), // Добавляем выбранный тип доставки
 }));
 
 export default useCartStore;
