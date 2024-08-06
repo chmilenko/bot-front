@@ -4,17 +4,17 @@ const useCartStore = create((set) => ({
   cartItems: [],
   typeDelivery: [],
   typePickup: {
-phone: null,
+    phone: '',
   },
   typeSdek: {
-    name: null,
-    address: null,
-    phone: null,
+    name: '',
+    address: '',
+    phone: '',
   },
   typeCity: {
-    name: null,
-    address: null,
-    phone: null,
+    name: '',
+    address: '',
+    phone: '',
   },
   addToCart: (model_id, size_id, size, price, totalCount) =>
     set((state) => {
@@ -65,6 +65,25 @@ phone: null,
       ...state,
       typeDelivery: types,
     })),
+    updateTypePickup: (data) =>
+      set((state) => ({
+        typePickup: { ...state.typePickup, ...data },
+      })),
+    updateTypeSdek: (data) =>
+      set((state) => ({
+        typeSdek: { ...state.typeSdek, ...data },
+      })),
+    updateTypeCity: (data) =>
+      set((state) => ({
+        typeCity: { ...state.typeCity, ...data },
+      })),
+    clearTypeDelivery: (type) =>
+      set((state) => ({
+        [type]: Object.keys(state[type]).reduce((acc, key) => {
+          acc[key] = "";
+          return acc;
+        }, {}),
+      })),
 }));
 
 export default useCartStore;

@@ -12,6 +12,7 @@ function ModelsBasket({
   cartDetails,
   setCartDetails,
   handleClickStepTypeDelivery,
+  textStep,
 }) {
   const { cartItems, updateItemCount, removeFromCart } = useCartStore();
 
@@ -103,7 +104,10 @@ function ModelsBasket({
         </div>
       ))}
       <div className="action-order">
-        <Button text="Оформить заказ" onClick={handleClickStepTypeDelivery} />
+        <Button
+          text={textStep}
+          onClick={handleClickStepTypeDelivery && handleClickStepTypeDelivery}
+        />
       </div>
     </>
   );

@@ -11,7 +11,14 @@ import DeliveryCity from "./TypesDelivery/DeliveryCity/DeliveryCity";
 import Sdek from "./TypesDelivery/SdekDelivery/Sdek";
 
 function TypeDelivery({ handleClickRefStep }) {
-  const { loadTypesDelivery, typeDelivery } = useCartStore();
+  const {
+    loadTypesDelivery,
+    typeDelivery,
+    clearTypeDelivery,
+    typePickup,
+    typeCity,
+    typeSdek,
+  } = useCartStore();
   const [openFormId, setOpenFormId] = useState(null);
 
   useEffect(() => {
@@ -19,7 +26,18 @@ function TypeDelivery({ handleClickRefStep }) {
   }, [loadTypesDelivery]);
 
   const handleClickOpenForm = (id) => {
+    if (openFormId === id) {
+      clearTypeDelivery(
+        id === 1 ? "typePickup" : id === 2 ? "typeCity" : "typeSdek"
+      );
+    }
     setOpenFormId((prevId) => (prevId === id ? null : id));
+  };
+
+  const isFormValid = (formType) => {
+    const form =
+      formType === 1 ? typePickup : formType === 2 ? typeCity : typeSdek;
+    return Object.values(form).every((value) => value.trim() !== "");
   };
 
   return (
@@ -53,13 +71,19 @@ function TypeDelivery({ handleClickRefStep }) {
                 <div className="type-delivery-content-types-child-form">
                   {el.id === 1 && <Pickup />}
                   {el.id === 2 && <DeliveryCity />}
-                  {el.id === 3 && (
-                    <div>
-                      <Sdek />
-                    </div>
-                  )}
+                  {el.id === 3 && <Sdek />}
                 </div>
               )}
+              <div>
+                {isFormValid(el.id) && (
+                  <button
+                    className="next-button"
+                    onClick={() => handleClickRefStep("confirmOrder")}
+                  >
+                    Далее
+                  </button>
+                )}
+              </div>
             </div>
           ))}
       </div>

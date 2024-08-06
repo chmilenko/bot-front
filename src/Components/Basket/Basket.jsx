@@ -4,6 +4,7 @@ import "./basket.scss";
 import useCartStore from "@Core/Store/cart";
 import ModelsBasket from "./Atoms/ModelsBasket";
 import TypeDelivery from "./Atoms/StepByStep/TypeDelivery/TypeDelivery";
+import Confirmation from "./Atoms/StepByStep/TypeDelivery/ConfirmOrder/Confirmation";
 
 function Basket() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -59,10 +60,14 @@ function Basket() {
               cartDetails={cartDetails}
               setCartDetails={setCartDetails}
               handleClickStepTypeDelivery={handleClickStepTypeDelivery}
+              textStep="Оформить заказ"
             />
           )}
           {step === "typeDelivery" && cartItems.length && (
             <TypeDelivery handleClickRefStep={handleClickRefStep} />
+          )}
+          {step === "confirmOrder" && cartItems.length && (
+            <Confirmation handleClickRefStep={handleClickRefStep} />
           )}
         </div>
       </Modal>
