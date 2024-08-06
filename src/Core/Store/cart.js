@@ -3,6 +3,19 @@ import { create } from "zustand";
 const useCartStore = create((set) => ({
   cartItems: [],
   typeDelivery: [],
+  typePickup: {
+phone: null,
+  },
+  typeSdek: {
+    name: null,
+    address: null,
+    phone: null,
+  },
+  typeCity: {
+    name: null,
+    address: null,
+    phone: null,
+  },
   addToCart: (model_id, size_id, size, price, totalCount) =>
     set((state) => {
       const existingItem = state.cartItems.find(

@@ -21,7 +21,7 @@ function Input({ text, className, type, value, setValue, file, onFocus }) {
         type={type ? type : "text"}
         onChange={(e) => setValue(e.target.value)}
         value={value}
-        onFocus={() => onFocus(true)}
+        onFocus={() => onFocus && onFocus(true)}
       />
     );
   }

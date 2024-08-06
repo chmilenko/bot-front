@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import "./TypeDelivery.scss";
 import Api from "@Core/Api/api";
@@ -5,9 +6,9 @@ import useCartStore from "@Core/Store/cart";
 
 import increment from "@assets/increments.svg";
 import decrement from "@assets/decrement.svg";
-import City from "./TypesDelivery/City/City";
+import Pickup from "./TypesDelivery/City/Pickup";
 import DeliveryCity from "./TypesDelivery/DeliveryCity/DeliveryCity";
-import Sdek from "./TypesDelivery/Sdek/Sdek";
+import Sdek from "./TypesDelivery/SdekDelivery/Sdek";
 
 function TypeDelivery({ handleClickRefStep }) {
   const { loadTypesDelivery, typeDelivery } = useCartStore();
@@ -50,7 +51,7 @@ function TypeDelivery({ handleClickRefStep }) {
               </div>
               {openFormId === el.id && (
                 <div className="type-delivery-content-types-child-form">
-                  {el.id === 1 && <City />}
+                  {el.id === 1 && <Pickup />}
                   {el.id === 2 && <DeliveryCity />}
                   {el.id === 3 && (
                     <div>

@@ -1,7 +1,9 @@
 import "./Sdek.scss";
 import Input from "@Ui/Input/Input";
+import useCartStore from "@Core/Store/cart";
 
 function Sdek() {
+  const { typeSdek } = useCartStore();
   return (
     <div className="sdek-container">
       <Input text="ФИО" />
