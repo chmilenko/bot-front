@@ -6,7 +6,6 @@ import Api from "@Core/Api/api";
 import increment from "@assets/increments.svg";
 import decrement from "@assets/decrement.svg";
 import Button from "@Ui/Button/Button";
-import { useState } from "react";
 
 function ModelsBasket({
   cartDetails,

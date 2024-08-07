@@ -4,17 +4,17 @@ const useCartStore = create((set) => ({
   cartItems: [],
   typeDelivery: [],
   typePickup: {
-    phone: '',
+    phoneNumber: '',
   },
   typeSdek: {
-    name: '',
+    fullName: '',
     address: '',
-    phone: '',
+    phoneNumber: '',
   },
   typeCity: {
-    name: '',
+    fullName: '',
     address: '',
-    phone: '',
+    phoneNumber: '',
   },
   selectedDeliveryType: null,
   addToCart: (model_id, size_id, size, price, totalCount) =>

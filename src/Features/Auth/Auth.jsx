@@ -12,14 +12,17 @@ import useAdminStore from "../../Core/Store/admin";
 
 function Auth() {
   const { user, setUser } = useAdminStore();
+  const [password, setPassword] = useState("");
+  const [login, setLogin] = useState("");
+
   const [cookies, setCookie] = useCookies(["token"]);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
 
   const handleClickAuthenication = async () => {
     const data = {
-      login: user.login,
-      password: user.password,
+      login,
+      password,
     };
 
     try {
@@ -47,15 +50,11 @@ function Auth() {
     <div className="container">
       <h3 className="container-title">Добро пожаловать работяга!</h3>
       <div className="container-inputs">
-        <Input
-          text="Логин"
-          value={user.login}
-          setValue={(value) => setUser({ ...user, login: value })}
-        />
+        <Input text="Логин" value={login} setValue={setLogin} />
         <Input
           text="Пароль"
-          value={user.password}
-          setValue={(value) => setUser({ ...user, password: value })}
+          value={password}
+          setValue={setPassword}
           type="password"
         />
       </div>
